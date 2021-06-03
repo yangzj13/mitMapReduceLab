@@ -14,21 +14,29 @@ import "strconv"
 // and reply for an RPC.
 //
 
-type ExampleArgs struct {
-	X int
+type ClaimArgs struct {
+	Wid string
 }
 
-type ExampleReply struct {
-	Y int
+type ClaimReply struct {
+	T       task
+	NReduce int
+}
+
+type FinishArgs struct {
+	T task
+}
+
+type FinishReply struct {
+	F bool
 }
 
 // Add your RPC definitions here.
 
-
 // Cook up a unique-ish UNIX-domain socket name
 // in /var/tmp, for the master.
-// Can't use the current directory since
-// Athena AFS doesn't support UNIX-domain sockets.
+// Can'T use the current directory since
+// Athena AFS doesn'T support UNIX-domain sockets.
 func masterSock() string {
 	s := "/var/tmp/824-mr-"
 	s += strconv.Itoa(os.Getuid())
